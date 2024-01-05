@@ -74,8 +74,6 @@ Module.read_data_block = function(arc, buff, len, offset) {
 
 Module.read_close = Module.cwrap("archive_read_close", "number", ["number"], {async: true});
 Module.read_free = Module.cwrap("archive_read_free", "number", ["number"], {async: true});
-Module.read_support_format_all = Module.cwrap("archive_read_support_format_all", "number", ["number"]);
-Module.read_support_filter_all = Module.cwrap("archive_read_support_filter_all", "number", ["number"]);
 Module.read_support_format_zip = Module.cwrap("archive_read_support_format_zip", "number", ["number"]);
 Module.read_support_format_zip_streamable = Module.cwrap("archive_read_support_format_zip_streamable", "number", ["number"]);
 Module.read_support_format_7zip = Module.cwrap("archive_read_support_format_7zip", "number", ["number"]);
@@ -83,3 +81,5 @@ Module.read_support_format_tar = Module.cwrap("archive_read_support_format_tar",
 Module.read_support_filter_gzip = Module.cwrap("archive_read_support_filter_gzip", "number", ["number"]);
 Module.read_support_filter_bzip2 = Module.cwrap("archive_read_support_filter_bzip2", "number", ["number"]);
 Module.read_support_filter_xz = Module.cwrap("archive_read_support_filter_xz", "number", ["number"]);
+Module.read_support_format_all = Module.cwrap("archive_read_support_format_all", "number", ["number"]);
+Module.read_support_filter_all = Module.cwrap("archive_read_support_filter_all", "number", ["number"]);

@@ -24,6 +24,12 @@ Specifically, the variants are:
  * archive, extract, all for writing, reading, or writing and reading all
    formats supported by libarchive (not just the above three!)
 
+Each of these variants also has a `-p` sub-variant (e.g., `zip-p`), which adds
+extra entry properties (in particular, the Unix-y ones) at a modest cost to
+build size. The `-p` versions are not built by default and not included in
+distributions; if you need these extra properties, you'll have to build it
+yourself.
+
 (NOTE: “arcex” means archiver-extractor, by the same convention as “modem” or
 “codec”)
 

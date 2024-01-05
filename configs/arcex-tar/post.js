@@ -72,6 +72,12 @@ Module.write_data = function(arc, data, size) {
 
 Module.write_close = Module.cwrap("archive_write_close", "number", ["number"]);
 Module.write_free = Module.cwrap("archive_write_free", "number", ["number"]);
+Module.write_set_format_gnutar = Module.cwrap("archive_write_set_format_gnutar", "number", ["number"]);
+Module.write_set_format_ustar = Module.cwrap("archive_write_set_format_ustar", "number", ["number"]);
+Module.write_set_format_v7tar = Module.cwrap("archive_write_set_format_v7tar", "number", ["number"]);
+Module.write_add_filter_gzip = Module.cwrap("archive_write_add_filter_gzip", "number", ["number"]);
+Module.write_add_filter_bzip2 = Module.cwrap("archive_write_add_filter_bzip2", "number", ["number"]);
+Module.write_add_filter_xz = Module.cwrap("archive_write_add_filter_xz", "number", ["number"]);
 /*
  * Copyright (C) 2024 Yahweasel
  *
@@ -135,13 +141,7 @@ Module.read_data_block = function(arc, buff, len, offset) {
 
 Module.read_close = Module.cwrap("archive_read_close", "number", ["number"], {async: true});
 Module.read_free = Module.cwrap("archive_read_free", "number", ["number"], {async: true});
-Module.write_set_format_gnutar = Module.cwrap("archive_write_set_format_gnutar", "number", ["number"]);
-Module.write_set_format_ustar = Module.cwrap("archive_write_set_format_ustar", "number", ["number"]);
-Module.write_set_format_v7tar = Module.cwrap("archive_write_set_format_v7tar", "number", ["number"]);
 Module.read_support_format_tar = Module.cwrap("archive_read_support_format_tar", "number", ["number"]);
-Module.write_add_filter_gzip = Module.cwrap("archive_write_add_filter_gzip", "number", ["number"]);
 Module.read_support_filter_gzip = Module.cwrap("archive_read_support_filter_gzip", "number", ["number"]);
-Module.write_add_filter_bzip2 = Module.cwrap("archive_write_add_filter_bzip2", "number", ["number"]);
 Module.read_support_filter_bzip2 = Module.cwrap("archive_read_support_filter_bzip2", "number", ["number"]);
-Module.write_add_filter_xz = Module.cwrap("archive_write_add_filter_xz", "number", ["number"]);
 Module.read_support_filter_xz = Module.cwrap("archive_read_support_filter_xz", "number", ["number"]);

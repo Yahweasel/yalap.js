@@ -72,6 +72,7 @@ Module.write_data = function(arc, data, size) {
 
 Module.write_close = Module.cwrap("archive_write_close", "number", ["number"]);
 Module.write_free = Module.cwrap("archive_write_free", "number", ["number"]);
+Module.write_set_format_zip = Module.cwrap("archive_write_set_format_zip", "number", ["number"]);
 /*
  * Copyright (C) 2024 Yahweasel
  *
@@ -135,6 +136,5 @@ Module.read_data_block = function(arc, buff, len, offset) {
 
 Module.read_close = Module.cwrap("archive_read_close", "number", ["number"], {async: true});
 Module.read_free = Module.cwrap("archive_read_free", "number", ["number"], {async: true});
-Module.write_set_format_zip = Module.cwrap("archive_write_set_format_zip", "number", ["number"]);
 Module.read_support_format_zip = Module.cwrap("archive_read_support_format_zip", "number", ["number"]);
 Module.read_support_format_zip_streamable = Module.cwrap("archive_read_support_format_zip_streamable", "number", ["number"]);

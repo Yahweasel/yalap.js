@@ -17,60 +17,98 @@
 const cproc = require("child_process");
 const fs = require("fs");
 
-const configs = [
-    ["zip", ["write", "zip", "zlib"]],
-    ["unzip", ["read", "unzip", "zlib", "libbz2", "liblzma"]],
-    ["arcex-zip", [
-        "write", "read", "zip", "unzip", "zlib", "libbz2", "liblzma"
-    ]],
+let formats = [
+    {
+        include: true,
+        arc: ["zip", ["zip", "zlib"]],
+        ext: ["unzip", ["unzip", "zlib", "libbz2", "liblzma"]]
+    },
 
-    ["7zip", ["write", "7zip", "zlib", "libbz2", "liblzma"]],
-    ["un7zip", ["read", "un7zip", "zlib", "libbz2", "liblzma"]],
-    ["arcex-7zip", [
-        "write", "read", "7zip", "un7zip", "zlib", "libbz2", "liblzma"
-    ]],
+    {
+        include: true,
+        arc: ["7zip", ["7zip", "zlib", "libbz2", "liblzma"]],
+        ext: ["un7zip", ["un7zip", "zlib", "libbz2", "liblzma"]]
+    },
 
-    ["tar", [
-        "write", "tar", "gzip", "zlib", "bzip2", "libbz2", "xz", "liblzma"
-    ]],
-    ["untar", [
-        "read", "untar", "gunzip", "zlib", "bunzip2", "libbz2", "unxz",
-        "liblzma"
-    ]],
-    ["arcex-tar", [
-        "write", "read", "tar", "untar", "gzip", "gunzip", "zlib", "bzip2",
-        "bunzip2", "libbz2", "xz", "unxz", "liblzma"
-    ]],
+    {
+        include: true,
+        arc: ["tar", [
+            "tar", "gzip", "bzip2", "xz", "zlib", "libbz2", "liblzma"
+        ]],
+        ext: ["untar", [
+            "untar", "gunzip", "bunzip2", "unxz", "zlib", "libbz2", "liblzma"
+        ]]
+    },
 
-    ["archive", [
-        "write", "arc-all", "comp-all",
-        "zip", "7zip", "tar",
-        "gzip", "bzip2", "xz",
-        "zlib", "libbz2", "liblzma"
-    ]],
-    ["extract", [
-        "read", "ext-all", "dec-all",
-        "unzip", "un7zip", "untar",
-        "gunzip", "bunzip2", "unxz",
-        "zlib", "libbz2", "liblzma"
-    ]],
-    ["all", [
-        "write", "arc-all", "comp-all",
-        "read", "ext-all", "dec-all",
-        "zip", "7zip", "tar",
-        "unzip", "un7zip", "untar",
-        "gzip", "bzip2", "xz",
-        "gunzip", "bunzip2", "unxz",
-        "zlib", "libbz2", "liblzma"
-    ]]
+    {
+        arc: ["archive", ["arc-all", "comp-all"]],
+        ext: ["extract", ["ext-all", "dec-all"]]
+    }
 ];
 
+function add(cur, curMap, toAdd) {
+    for (const fragment of toAdd) {
+        if (!curMap[fragment]) {
+            cur.push(fragment);
+            curMap[fragment] = true;
+        }
+    }
+}
+
+async function mkconfig(name, config) {
+    const p = cproc.spawn("./mkconfig.js", [name, JSON.stringify(config)], {
+        stdio: "inherit"
+    });
+    await new Promise(res => p.on("close", res));
+}
+
 async function main() {
-    for (let [name, config] of configs) {
-        const p = cproc.spawn("./mkconfig.js", [name, JSON.stringify(config)], {
-            stdio: "inherit"
-        });
-        await new Promise(res => p.on("close", res));
+    // Single-format configs
+    for (const format of formats) {
+        if (!format.include)
+            continue;
+        let cur = [];
+        let curMap = {};
+        add(cur, curMap, ["write"]);
+        add(cur, curMap, format.arc[1]);
+        await mkconfig(format.arc[0], cur);
+        await mkconfig(format.arc[0] + "-p", cur.concat(["write-more"]));
+        add(cur, curMap, ["read"]);
+        add(cur, curMap, format.ext[1]);
+        await mkconfig("arcex-" + format.arc[0], cur);
+        await mkconfig(
+            "arcex-" + format.arc[0] + "-p",
+            cur.concat(["write-more", "read-more"])
+        );
+        cur = [];
+        curMap = {};
+        add(cur, curMap, ["read"]);
+        add(cur, curMap, format.ext[1]);
+        await mkconfig(format.ext[0], cur);
+        await mkconfig(format.ext[0] + "-p", cur.concat(["read-more"]));
+    }
+
+    // All-format configs
+    {
+        let cur = [];
+        let curMap = {};
+        add(cur, curMap, ["write"]);
+        for (const format of formats)
+            add(cur, curMap, format.arc[1]);
+        await mkconfig("archive", cur);
+        await mkconfig("archive-p", cur.concat(["write-more"]));
+        add(cur, curMap, ["read"]);
+        for (const format of formats)
+            add(cur, curMap, format.ext[1]);
+        await mkconfig("all", cur);
+        await mkconfig("all-p", cur.concat(["write-more", "read-more"]));
+        cur = [];
+        curMap = {};
+        add(cur, curMap, ["read"]);
+        for (const format of formats)
+            add(cur, curMap, format.ext[1]);
+        await mkconfig("extract", cur);
+        await mkconfig("extract-p", cur.concat(["read-more"]));
     }
 }
 main();
