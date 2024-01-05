@@ -1,9 +1,9 @@
-const YALAP = require("../dist/yalap-0.0.1-zip.js");
+const YALAP = require("../dist/yalap-0.0.1-7zip.js");
 
 async function main() {
     const la = await YALAP.YALAP();
     const arc = await la.write_new();
-    await la.write_set_format_zip(arc);
+    await la.write_set_format_7zip(arc);
     await la.write_set_bytes_in_last_block(arc, 1);
 
     la.module.onWrite = function(file, data) {

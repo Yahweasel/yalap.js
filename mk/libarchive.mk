@@ -6,7 +6,9 @@ build/inst/lib/pkgconfig/libarchive.pc: \
 
 build/libarchive-$(LIBARCHIVE_VERSION)/wasm/config.h: \
 	build/libarchive-$(LIBARCHIVE_VERSION)/configure \
-	build/inst/lib/pkgconfig/zlib.pc
+	build/inst/lib/pkgconfig/zlib.pc \
+	build/inst/lib/libbz2.a \
+	build/inst/lib/pkgconfig/liblzma.pc
 	mkdir -p build/libarchive-$(LIBARCHIVE_VERSION)/wasm
 	cd build/libarchive-$(LIBARCHIVE_VERSION)/wasm && \
 		emconfigure env \
@@ -24,4 +26,4 @@ build/libarchive-$(LIBARCHIVE_VERSION)/configure: \
 
 build/libarchive-$(LIBARCHIVE_VERSION).tar.xz:
 	mkdir -p build
-	curl https://www.libarchive.org/downloads/libarchive-$(LIBARCHIVE_VERSION).tar.xz -o $@
+	curl https://www.libarchive.org/downloads/libarchive-$(LIBARCHIVE_VERSION).tar.xz -L -o $@

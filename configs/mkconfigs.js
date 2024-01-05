@@ -18,7 +18,8 @@ const cproc = require("child_process");
 const fs = require("fs");
 
 const configs = [
-    ["zip", ["write", "zip", "zlib"]]
+    ["zip", ["write", "zip", "zlib"]],
+    ["7zip", ["write", "7zip", "zlib", "bz2", "lzma"]]
 ];
 
 async function main() {
