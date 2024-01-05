@@ -1,0 +1,33 @@
+{
+  "name": "yalap.js",
+  "version": "0.0.1",
+  "description": "Yet another libarchive port to JavaScript/WebAssembly. Aims to have feature-reduced builds that aren't bloated by tasks you don't need.",
+  "main": "dist/yalap-0.0.1-all.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yahweasel/yalap.git"
+  },
+  "keywords": [
+    "libarchive",
+    "archive",
+    "zip",
+    "extract",
+    "compress",
+    "decompress"
+  ],
+  "author": "Yahweasel",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Yahweasel/yalap/issues"
+  },
+  "homepage": "https://github.com/Yahweasel/yalap#readme",
+  "devDependencies": {
+    "uglify-js": "^3.17.4"
+  }
+}
