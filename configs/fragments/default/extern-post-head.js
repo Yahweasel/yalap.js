@@ -16,6 +16,7 @@
 YALAP.funcs = [
     "version_number",
     "version_string",
+    "error_string",
     "entry_new",
     "entry_clear",
     "entry_clone",

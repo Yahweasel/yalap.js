@@ -20,6 +20,7 @@
 YALAP.funcs = [
     "version_number",
     "version_string",
+    "error_string",
     "entry_new",
     "entry_clear",
     "entry_clone",
@@ -59,6 +60,12 @@ YALAP.scriptName = (typeof document !== "undefined" && document.currentScript)
     : void 0;
 
 Object.assign(YALAP, {
+    ARCHIVE_EOF: 1,
+    ARCHIVE_OK: 0,
+    ARCHIVE_RETRY: -10,
+    ARCHIVE_WARN: -20,
+    ARCHIVE_FAILED: -25,
+    ARCHIVE_FATAL: -30,
     AE_IFREG: 0x8000,
     AE_IFLNK: 0xA000,
     AE_IFSOCK: 0xC000,
