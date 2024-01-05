@@ -72,6 +72,8 @@ Module.write_data = function(arc, data, size) {
 
 Module.write_close = Module.cwrap("archive_write_close", "number", ["number"]);
 Module.write_free = Module.cwrap("archive_write_free", "number", ["number"]);
+Module.entry_set_mtime = Module.cwrap("yalap_entry_set_mtime", null, ["number", "number", "number"]);
+Module.entry_unset_mtime = Module.cwrap("archive_entry_unset_mtime", null, ["number"]);
 Module.write_set_format_zip = Module.cwrap("archive_write_set_format_zip", "number", ["number"]);
 /*
  * Copyright (C) 2024 Yahweasel
@@ -110,5 +112,3 @@ Module.entry_set_birthtime = Module.cwrap("yalap_entry_set_birthtime", null, ["n
 Module.entry_unset_birthtime = Module.cwrap("archive_entry_unset_birthtime", null, ["number"]);
 Module.entry_set_ctime = Module.cwrap("yalap_entry_set_ctime", null, ["number", "number", "number"]);
 Module.entry_unset_ctime = Module.cwrap("archive_entry_unset_ctime", null, ["number"]);
-Module.entry_set_mtime = Module.cwrap("yalap_entry_set_mtime", null, ["number", "number", "number"]);
-Module.entry_unset_mtime = Module.cwrap("archive_entry_unset_mtime", null, ["number"]);

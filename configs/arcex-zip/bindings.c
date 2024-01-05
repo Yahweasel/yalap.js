@@ -79,6 +79,12 @@ void yalap_entry_set_size64(
     archive_entry_set_size(ent,
         (((int64_t) hi) << 32) | ((int64_t) lo));
 }
+
+void yalap_entry_set_mtime(
+    struct archive_entry *ent, double sec, long nanosec
+) {
+    archive_entry_set_mtime(ent, (time_t) sec, nanosec);
+}
 /*
  * Copyright (C) 2024 Yahweasel
  *
@@ -180,4 +186,9 @@ int yalap_read_open_js(struct archive *arc, const char *name) {
 
 double yalap_entry_size(struct archive_entry *ent) {
     return (double) archive_entry_size(ent);
+}
+
+double yalap_entry_mtime(struct archive_entry *ent)
+{
+    return (double) archive_entry_mtime(ent);
 }

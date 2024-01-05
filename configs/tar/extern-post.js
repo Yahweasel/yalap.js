@@ -29,7 +29,7 @@ YALAP.funcs = [
     "free"
 ];
 YALAP.callbacks = [];
-YALAP.funcs.push("write_new", "write_get_bytes_per_block", "write_set_bytes_per_block", "write_get_bytes_in_last_block", "write_set_bytes_in_last_block", "write_set_filter_option", "write_set_format_option", "write_set_option", "write_open_js", "entry_update_pathname_utf8", "entry_default_stat", "entry_set_size64", "entry_set_size", "entry_unset_size", "entry_set_filetype", "entry_set_perm", "entry_set_mode", "write_header", "write_data", "write_close", "write_free");
+YALAP.funcs.push("write_new", "write_get_bytes_per_block", "write_set_bytes_per_block", "write_get_bytes_in_last_block", "write_set_bytes_in_last_block", "write_set_filter_option", "write_set_format_option", "write_set_option", "write_open_js", "entry_update_pathname_utf8", "entry_default_stat", "entry_set_size64", "entry_set_size", "entry_unset_size", "entry_set_filetype", "entry_set_perm", "entry_set_mode", "write_header", "write_data", "write_close", "write_free", "entry_set_mtime", "entry_unset_mtime");
 YALAP.callbacks.push("onWriteOpen", "onWrite", "onWriteClose");
 YALAP.funcs.push("write_set_format_gnutar", "write_set_format_ustar", "write_set_format_v7tar");
 YALAP.funcs.push("write_add_filter_gzip");

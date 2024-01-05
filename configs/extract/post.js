@@ -74,6 +74,9 @@ Module.read_data_block = function(arc, buff, len, offset) {
 
 Module.read_close = Module.cwrap("archive_read_close", "number", ["number"], {async: true});
 Module.read_free = Module.cwrap("archive_read_free", "number", ["number"], {async: true});
+Module.entry_mtime = Module.cwrap("yalap_entry_mtime", "number", ["number"]);
+Module.entry_mtime_nsec = Module.cwrap("archive_entry_mtime_nsec", "number", ["number"]);
+Module.entry_mtime_is_set = Module.cwrap("archive_entry_mtime_is_set", "boolean", ["number"]);
 Module.read_support_format_zip = Module.cwrap("archive_read_support_format_zip", "number", ["number"]);
 Module.read_support_format_zip_streamable = Module.cwrap("archive_read_support_format_zip_streamable", "number", ["number"]);
 Module.read_support_format_7zip = Module.cwrap("archive_read_support_format_7zip", "number", ["number"]);

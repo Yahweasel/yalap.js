@@ -79,3 +79,9 @@ void yalap_entry_set_size64(
     archive_entry_set_size(ent,
         (((int64_t) hi) << 32) | ((int64_t) lo));
 }
+
+void yalap_entry_set_mtime(
+    struct archive_entry *ent, double sec, long nanosec
+) {
+    archive_entry_set_mtime(ent, (time_t) sec, nanosec);
+}

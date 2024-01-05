@@ -113,6 +113,11 @@ int yalap_read_open_js(struct archive *arc, const char *name) {
 double yalap_entry_size(struct archive_entry *ent) {
     return (double) archive_entry_size(ent);
 }
+
+double yalap_entry_mtime(struct archive_entry *ent)
+{
+    return (double) archive_entry_mtime(ent);
+}
 /*
  * Copyright (C) 2024 Yahweasel
  *
@@ -146,9 +151,4 @@ double yalap_entry_birthtime(struct archive_entry *ent)
 double yalap_entry_ctime(struct archive_entry *ent)
 {
     return (double) archive_entry_ctime(ent);
-}
-
-double yalap_entry_mtime(struct archive_entry *ent)
-{
-    return (double) archive_entry_mtime(ent);
 }

@@ -72,6 +72,8 @@ Module.write_data = function(arc, data, size) {
 
 Module.write_close = Module.cwrap("archive_write_close", "number", ["number"]);
 Module.write_free = Module.cwrap("archive_write_free", "number", ["number"]);
+Module.entry_set_mtime = Module.cwrap("yalap_entry_set_mtime", null, ["number", "number", "number"]);
+Module.entry_unset_mtime = Module.cwrap("archive_entry_unset_mtime", null, ["number"]);
 Module.write_set_format_gnutar = Module.cwrap("archive_write_set_format_gnutar", "number", ["number"]);
 Module.write_set_format_ustar = Module.cwrap("archive_write_set_format_ustar", "number", ["number"]);
 Module.write_set_format_v7tar = Module.cwrap("archive_write_set_format_v7tar", "number", ["number"]);
@@ -141,6 +143,9 @@ Module.read_data_block = function(arc, buff, len, offset) {
 
 Module.read_close = Module.cwrap("archive_read_close", "number", ["number"], {async: true});
 Module.read_free = Module.cwrap("archive_read_free", "number", ["number"], {async: true});
+Module.entry_mtime = Module.cwrap("yalap_entry_mtime", "number", ["number"]);
+Module.entry_mtime_nsec = Module.cwrap("archive_entry_mtime_nsec", "number", ["number"]);
+Module.entry_mtime_is_set = Module.cwrap("archive_entry_mtime_is_set", "boolean", ["number"]);
 Module.read_support_format_tar = Module.cwrap("archive_read_support_format_tar", "number", ["number"]);
 Module.read_support_filter_gzip = Module.cwrap("archive_read_support_filter_gzip", "number", ["number"]);
 Module.read_support_filter_bzip2 = Module.cwrap("archive_read_support_filter_bzip2", "number", ["number"]);

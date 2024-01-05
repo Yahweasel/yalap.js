@@ -40,6 +40,3 @@ Module.entry_birthtime_is_set = Module.cwrap("archive_entry_birthtime_is_set", "
 Module.entry_ctime = Module.cwrap("yalap_entry_ctime", "number", ["number"]);
 Module.entry_ctime_nsec = Module.cwrap("archive_entry_ctime_nsec", "number", ["number"]);
 Module.entry_ctime_is_set = Module.cwrap("archive_entry_ctime_is_set", "boolean", ["number"]);
-Module.entry_mtime = Module.cwrap("yalap_entry_mtime", "number", ["number"]);
-Module.entry_mtime_nsec = Module.cwrap("archive_entry_mtime_nsec", "number", ["number"]);
-Module.entry_mtime_is_set = Module.cwrap("archive_entry_mtime_is_set", "boolean", ["number"]);

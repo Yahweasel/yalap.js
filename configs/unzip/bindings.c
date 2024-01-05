@@ -113,3 +113,8 @@ int yalap_read_open_js(struct archive *arc, const char *name) {
 double yalap_entry_size(struct archive_entry *ent) {
     return (double) archive_entry_size(ent);
 }
+
+double yalap_entry_mtime(struct archive_entry *ent)
+{
+    return (double) archive_entry_mtime(ent);
+}

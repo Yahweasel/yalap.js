@@ -74,6 +74,9 @@ Module.read_data_block = function(arc, buff, len, offset) {
 
 Module.read_close = Module.cwrap("archive_read_close", "number", ["number"], {async: true});
 Module.read_free = Module.cwrap("archive_read_free", "number", ["number"], {async: true});
+Module.entry_mtime = Module.cwrap("yalap_entry_mtime", "number", ["number"]);
+Module.entry_mtime_nsec = Module.cwrap("archive_entry_mtime_nsec", "number", ["number"]);
+Module.entry_mtime_is_set = Module.cwrap("archive_entry_mtime_is_set", "boolean", ["number"]);
 Module.read_support_format_7zip = Module.cwrap("archive_read_support_format_7zip", "number", ["number"]);
 /*
  * Copyright (C) 2024 Yahweasel
@@ -117,6 +120,3 @@ Module.entry_birthtime_is_set = Module.cwrap("archive_entry_birthtime_is_set", "
 Module.entry_ctime = Module.cwrap("yalap_entry_ctime", "number", ["number"]);
 Module.entry_ctime_nsec = Module.cwrap("archive_entry_ctime_nsec", "number", ["number"]);
 Module.entry_ctime_is_set = Module.cwrap("archive_entry_ctime_is_set", "boolean", ["number"]);
-Module.entry_mtime = Module.cwrap("yalap_entry_mtime", "number", ["number"]);
-Module.entry_mtime_nsec = Module.cwrap("archive_entry_mtime_nsec", "number", ["number"]);
-Module.entry_mtime_is_set = Module.cwrap("archive_entry_mtime_is_set", "boolean", ["number"]);

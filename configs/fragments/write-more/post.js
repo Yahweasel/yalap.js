@@ -35,5 +35,3 @@ Module.entry_set_birthtime = Module.cwrap("yalap_entry_set_birthtime", null, ["n
 Module.entry_unset_birthtime = Module.cwrap("archive_entry_unset_birthtime", null, ["number"]);
 Module.entry_set_ctime = Module.cwrap("yalap_entry_set_ctime", null, ["number", "number", "number"]);
 Module.entry_unset_ctime = Module.cwrap("archive_entry_unset_ctime", null, ["number"]);
-Module.entry_set_mtime = Module.cwrap("yalap_entry_set_mtime", null, ["number", "number", "number"]);
-Module.entry_unset_mtime = Module.cwrap("archive_entry_unset_mtime", null, ["number"]);

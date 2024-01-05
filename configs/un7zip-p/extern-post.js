@@ -29,10 +29,10 @@ YALAP.funcs = [
     "free"
 ];
 YALAP.callbacks = [];
-YALAP.funcs.push("read_new", "read_set_filter_option", "read_set_format_option", "read_set_option", "read_open_js", "entry_pathname", "entry_size", "entry_size_is_set", "entry_filetype", "entry_perm", "entry_mode", "read_next_header2", "read_data_block", "read_close", "read_free");
+YALAP.funcs.push("read_new", "read_set_filter_option", "read_set_format_option", "read_set_option", "read_open_js", "entry_pathname", "entry_size", "entry_size_is_set", "entry_filetype", "entry_perm", "entry_mode", "read_next_header2", "read_data_block", "read_close", "read_free", "entry_mtime", "entry_mtime_nsec", "entry_mtime_is_set");
 YALAP.callbacks.push("onReadOpen", "onRead", "onReadClose");
 YALAP.funcs.push("read_support_format_7zip");
-YALAP.funcs.push("entry_hardlink", "entry_sourcepath", "entry_symlink", "entry_gid", "entry_uid", "entry_strmode", "entry_gname", "entry_uname", "entry_dev", "entry_devmajor", "entry_devminor", "entry_ino", "entry_ino_is_set", "entry_ino64", "entry_nlink", "entry_rdev", "entry_rdevmajor", "entry_rdevminor", "entry_atime", "entry_atime_nsec", "entry_atime_is_set", "entry_birthtime", "entry_birthtime_nsec", "entry_birthtime_is_set", "entry_ctime", "entry_ctime_nsec", "entry_ctime_is_set", "entry_mtime", "entry_mtime_nsec", "entry_mtime_is_set");
+YALAP.funcs.push("entry_hardlink", "entry_sourcepath", "entry_symlink", "entry_gid", "entry_uid", "entry_strmode", "entry_gname", "entry_uname", "entry_dev", "entry_devmajor", "entry_devminor", "entry_ino", "entry_ino_is_set", "entry_ino64", "entry_nlink", "entry_rdev", "entry_rdevmajor", "entry_rdevminor", "entry_atime", "entry_atime_nsec", "entry_atime_is_set", "entry_birthtime", "entry_birthtime_nsec", "entry_birthtime_is_set", "entry_ctime", "entry_ctime_nsec", "entry_ctime_is_set");
 /*
  * Copyright (C) 2024 Yahweasel
  *

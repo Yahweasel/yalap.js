@@ -72,6 +72,8 @@ Module.write_data = function(arc, data, size) {
 
 Module.write_close = Module.cwrap("archive_write_close", "number", ["number"]);
 Module.write_free = Module.cwrap("archive_write_free", "number", ["number"]);
+Module.entry_set_mtime = Module.cwrap("yalap_entry_set_mtime", null, ["number", "number", "number"]);
+Module.entry_unset_mtime = Module.cwrap("archive_entry_unset_mtime", null, ["number"]);
 Module.write_set_format_zip = Module.cwrap("archive_write_set_format_zip", "number", ["number"]);
 Module.write_set_format_7zip = Module.cwrap("archive_write_set_format_7zip", "number", ["number"]);
 Module.write_set_format_gnutar = Module.cwrap("archive_write_set_format_gnutar", "number", ["number"]);

@@ -19,6 +19,8 @@
 "_archive_write_data",
 "_archive_write_close",
 "_archive_write_free",
+"_yalap_entry_set_mtime",
+"_archive_entry_unset_mtime",
 "_archive_write_set_format_gnutar",
 "_archive_write_set_format_ustar",
 "_archive_write_set_format_v7tar",

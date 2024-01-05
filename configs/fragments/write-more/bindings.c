@@ -34,9 +34,3 @@ void yalap_entry_set_ctime(
 ) {
     archive_entry_set_ctime(ent, (time_t) sec, nanosec);
 }
-
-void yalap_entry_set_mtime(
-    struct archive_entry *ent, double sec, long nanosec
-) {
-    archive_entry_set_mtime(ent, (time_t) sec, nanosec);
-}
