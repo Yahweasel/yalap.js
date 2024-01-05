@@ -59,7 +59,7 @@ Module.read_data_block = function(arc, buff, len, offset) {
             buff = tmpb[0];
             len = tmpb[1];
             ret = {
-                buf: Module.HEAPU8.slice(buff, buff + len),
+                buf: Module.HEAPU8.subarray(buff, buff + len),
                 offset: tmpb[2] + tmpb[3] * 0x100000000
             };
             Module.free(tmp);
