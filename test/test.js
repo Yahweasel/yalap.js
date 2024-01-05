@@ -17,7 +17,6 @@ async function main() {
         await la.write_open_js(arc, "out");
         await la.entry_default_stat(ent);
         await la.entry_update_pathname_utf8(ent, "hello.txt");
-        await la.entry_set_size(ent, 13);
         await la.write_header(arc, ent);
         let data = (new TextEncoder()).encode("Hello, world!");
         await la.write_data(arc, data);

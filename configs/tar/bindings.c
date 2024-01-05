@@ -69,7 +69,8 @@ void yalap_entry_default_stat(struct archive_entry *ent) {
     struct stat sbuf;
     creat("default", 0644);
     stat("default", &sbuf);
-    return archive_entry_copy_stat(ent, &sbuf);
+    archive_entry_copy_stat(ent, &sbuf);
+    archive_entry_unset_size(ent);
 }
 
 void yalap_entry_set_size64(
