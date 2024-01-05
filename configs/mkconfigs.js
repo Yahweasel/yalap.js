@@ -40,6 +40,28 @@ const configs = [
     ["arcex-tar", [
         "write", "read", "tar", "untar", "gzip", "gunzip", "zlib", "bzip2",
         "bunzip2", "libbz2", "xz", "unxz", "liblzma"
+    ]],
+
+    ["archive", [
+        "write", "arc-all", "comp-all",
+        "zip", "7zip", "tar",
+        "gzip", "bzip2", "xz",
+        "zlib", "libbz2", "liblzma"
+    ]],
+    ["extract", [
+        "read", "ext-all", "dec-all",
+        "unzip", "un7zip", "untar",
+        "gunzip", "bunzip2", "unxz",
+        "zlib", "libbz2", "liblzma"
+    ]],
+    ["all", [
+        "write", "arc-all", "comp-all",
+        "read", "ext-all", "dec-all",
+        "zip", "7zip", "tar",
+        "unzip", "un7zip", "untar",
+        "gzip", "bzip2", "xz",
+        "gunzip", "bunzip2", "unxz",
+        "zlib", "libbz2", "liblzma"
     ]]
 ];
 

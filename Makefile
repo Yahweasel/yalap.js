@@ -14,7 +14,8 @@ YALAP_VERSION=0.0.1
 all: \
 	build-zip build-unzip build-arcex-zip \
 	build-7zip build-un7zip build-arcex-7zip \
-	build-tar build-untar build-arcex-tar
+	build-tar build-untar build-arcex-tar \
+	build-archive build-extract build-all
 
 include mk/*.mk
 
