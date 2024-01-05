@@ -37,10 +37,7 @@ dist/yalap-$(YALAP_VERSION)-%.js: configs/%/exports.txt \
 		configs/$*/bindings.c \
 		build/inst/lib/libarchive.a \
 		`cat configs/$*/libs.txt` -o $@
-	( \
-		cat configs/$*/license.js ; \
-		./node_modules/.bin/uglifyjs -m < $@ \
-	) > $@.tmp
+	./node_modules/.bin/uglifyjs -m --comments '/^!/' < $@ > $@.tmp
 	mv $@.tmp $@
 	chmod a-x dist/yalap-$(YALAP_VERSION)-$*.wasm
 
