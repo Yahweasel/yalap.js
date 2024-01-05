@@ -11,7 +11,7 @@ EFLAGS=\
 
 YALAP_VERSION=0.0.1
 
-all: build-zip
+all: build-zip build-7zip build-tar
 
 include mk/*.mk
 
