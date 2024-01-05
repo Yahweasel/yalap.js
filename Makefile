@@ -1,5 +1,6 @@
 CC=emcc
 CFLAGS=-Oz
+MINIFY=./node_modules/.bin/uglifyjs -m --comments '/^!/'
 EFLAGS=\
 	--memory-init-file 0 \
 	-s WASM=2 \
@@ -37,7 +38,7 @@ dist/yalap-$(YALAP_VERSION)-%.js: configs/%/exports.txt \
 		configs/$*/bindings.c \
 		build/inst/lib/libarchive.a \
 		`cat configs/$*/libs.txt` -o $@
-	./node_modules/.bin/uglifyjs -m --comments '/^!/' < $@ > $@.tmp
+	$(MINIFY) < $@ > $@.tmp
 	mv $@.tmp $@
 	chmod a-x dist/yalap-$(YALAP_VERSION)-$*.wasm
 

@@ -25,7 +25,7 @@ EM_JS(la_ssize_t, yalap_write_write_cb, (
 ), {
     name = UTF8ToString(name);
     if (Module.onWrite)
-        Module.onWrite(name, Module.HEAPU8.subarray(buffer, buffer + length));
+        Module.onWrite(name, Module.HEAPU8.slice(buffer, buffer + length));
     return length;
 });
 

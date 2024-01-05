@@ -65,19 +65,15 @@ above example:
 ...
 la.onWrite = (file /* : string */, data /* : Uint8Array */) => {
     fileData[file] = fileData[file] || [];
-    fileData[file].push(data.slice(0));
+    fileData[file].push(data);
 };
 
 await la.write_open_js(arc, "out.zip");
 ...
 ```
 
-Note that the buffer passed to `onWrite` *may* alias the internal memory of
-libarchive (indeed, it will if you're not using workers), so you should
-duplicate it (with e.g. `.slice(0)`) if you intend to keep it past the `onWrite`
-call itself. `onWrite` is not called asynchronously, so if it's implemented as
-an async function, you will need to duplicate the buffer before awaiting
-anything.
+The buffer passed to `onWrite` is owned by you, i.e., it will not alias internal
+memory.
 
 `onWriteOpen` and `onWriteClose` callbacks may also be provided, and take only
 the filename argument.
@@ -120,7 +116,6 @@ argument, in which case it will return an object of the form
     offset /* : number */
 }
 ```
-Like with `onWrite`, the buffer may be aliased into libarchive memory, and so
-should be duplicated if you need to keep it. Note that if `read_data_block`
-fails, the return will be a number (the error code, as in the native interface),
-*not* this object.
+Like with `onWrite`, the buffer is now owned by you, and will not alias
+anything. Note that if `read_data_block` fails, the return will be a number (the
+error code, as in the native interface), *not* this object.

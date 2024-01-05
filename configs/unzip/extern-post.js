@@ -76,8 +76,97 @@ YALAP.YALAP = function(opts) {
         typeof YALAP.scriptName !== "undefined" &&
         (!opts || !opts.noworker);
 
-    if (useWorker && false) {
-        // ...
+    if (useWorker) {
+        var ret = {mode: "worker", _idx: 0, _rets: {}};
+        var worker = ret.worker = new Worker(YALAP.scriptName);
+        var workerRes, workerRej;
+        var workerP = new Promise(function(res, rej) {
+            workerRes = res;
+            workerRej = rej;
+        });
+
+        worker.onmessage = function(ev) {
+            var msg = ev.data;
+            if (!msg || !msg.c)
+                return;
+            switch (msg.c) {
+                case "yalapReady":
+                    if (msg.x)
+                        workerRej(msg.x);
+                    else
+                        workerRes();
+                    break;
+
+                case "ret":
+                case "retx":
+                {
+                    var handler = ret._rets[msg.i];
+                    delete ret._rets[msg.i];
+                    if (handler) {
+                        if (msg.c === "ret")
+                            handler.res(msg.v);
+                        else
+                            handler.rej(msg.v);
+                    }
+                    break;
+                }
+
+                case "cb":
+                {
+                    var cb = ret[msg.f];
+                    var cbr = void 0;
+                    if (cb)
+                        cbr = cb.apply(ret, msg.a);
+                    Promise.all([]).then(function() {
+                        return cbr;
+                    }).then(function(cbr) {
+                        worker.postMessage({
+                            c: "cbr",
+                            i: msg.i,
+                            v: cbr
+                        });
+                    }).catch(function(cbr) {
+                        worker.postMessage({
+                            c: "cbrx",
+                            i: msg.i,
+                            v: cbr
+                        });
+                    });
+                    break;
+                }
+            }
+        };
+
+        return Promise.all([]).then(function() {
+            var funcs = YALAP.funcs;
+
+            for (var fi = 0; fi < funcs.length; fi++) (function(func) {
+                ret[func] = function() {
+                    var i = ret._idx++;
+                    var p = new Promise(function(res, rej) {
+                        ret._rets[i] = {res: res, rej: rej};
+                    });
+                    worker.postMessage({
+                        c: "call",
+                        i: i,
+                        f: func,
+                        a: Array.from(arguments)
+                    });
+                    return p;
+                };
+            })(funcs[fi]);
+
+            // Start the actual yalap.js worker
+            worker.postMessage({
+                c: "yalap"
+            });
+
+            return workerP;
+
+        }).then(function() {
+            return ret;
+
+        });
 
     } else {
         var ret = {mode: "direct"};
@@ -109,3 +198,101 @@ YALAP.YALAP = function(opts) {
 
     }
 };
+
+if (typeof importScripts !== "undefined") (function() {
+    // We're a worker. Prepare for the possibility of starting a module
+    Promise.all([]).then(function() {
+        var pres, prej;
+        var p = new Promise(function(res, rej) {
+            pres = res;
+            prej = rej;
+        });
+
+        function onmessage(ev) {
+            var msg = ev.data;
+            if (msg && msg.c === "yalap") {
+                removeEventListener("message", onmessage);
+                YALAP().then(pres).catch(prej);
+            }
+        }
+        addEventListener("message", onmessage);
+
+        return p;
+
+    }).then(function(module) {
+        // Module loaded, prepare for commands
+        var idx = 0;
+        var rets = {};
+
+        // Prepare our callbacks
+        var funcs = YALAP.callbacks;
+        for (var fi = 0; fi < funcs.length; fi++) (function(func) {
+            module[func] = function() {
+                var i = idx++;
+                var p = new Promise(function(res, rej) {
+                    rets[i] = {res: res, rej: rej};
+                });
+                postMessage({
+                    c: "cb",
+                    i: i,
+                    f: func,
+                    a: Array.from(arguments)
+                });
+                return p;
+            };
+        })(funcs[fi]);
+
+        // And prepare for messages
+        function onmessage(ev) {
+            var msg = ev.data;
+            if (!msg || !msg.c) return;
+            switch (msg.c) {
+                case "call":
+                Promise.all([]).then(function() {
+                    // Call the requested function
+                    return module[msg.f].apply(module, msg.a);
+                }).then(function(ret) {
+                    postMessage({
+                        c: "ret",
+                        i: msg.i,
+                        v: ret
+                    });
+                }).catch(function(ex) {
+                    postMessage({
+                        c: "retx",
+                        i: msg.i,
+                        v: ex
+                    });
+                });
+                break;
+
+                case "cbr":
+                case "cbrx":
+                {
+                    var handler = rets[msg.i];
+                    delete rets[msg.i];
+                    if (handler) {
+                        if (msg.c === "cbr")
+                            handler.res(msg.v);
+                        else
+                            handler.rej(msg.v);
+                    }
+                    break;
+                }
+            }
+        }
+        addEventListener("message", onmessage);
+
+        // Tell the host we're ready
+        postMessage({
+            c: "yalapReady"
+        });
+
+    }).catch(function(ex) {
+        postMessage({
+            c: "yalapReady",
+            x: ex
+        });
+
+    });;
+})();
