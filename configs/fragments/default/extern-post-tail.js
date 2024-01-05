@@ -55,6 +55,14 @@ YALAP.YALAP = function(opts) {
                 };
             })(funcs[fi]);
 
+            funcs = YALAP.callbacks;
+            for (var fi = 0; fi < funcs.length; fi++) (function(func) {
+                module[func] = function() {
+                    if (ret[func])
+                        return ret[func].apply(ret, arguments);
+                };
+            })(funcs[fi]);
+
             return ret;
         });
 
