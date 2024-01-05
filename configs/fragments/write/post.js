@@ -28,6 +28,7 @@ Module.entry_set_size64 = Module.cwrap("yalap_entry_set_size64", null, ["number"
 Module.entry_set_size = function(arc, size) { Module.entry_set_size64(arc, ~~size, Math.floor(size / 0x100000000)); };
 Module.entry_unset_size = Module.cwrap("archive_entry_unset_size", null, ["number"]);
 Module.entry_set_filetype = Module.cwrap("archive_entry_set_filetype", null, ["number", "number"]);
+Module.entry_set_perm = Module.cwrap("archive_entry_set_perm", null, ["number", "number"]);
 Module.entry_set_mode = Module.cwrap("archive_entry_set_mode", null, ["number", "number"]);
 Module.write_header = Module.cwrap("archive_write_header", "number", ["number", "number"]);
 Module.write_data_int = Module.cwrap("archive_write_data", "number", ["number", "number", "number"]);

@@ -22,6 +22,7 @@ Module.entry_pathname = Module.cwrap("archive_entry_pathname", "string", ["numbe
 Module.entry_size = Module.cwrap("yalap_entry_size", "number", ["number"]);
 Module.entry_size_is_set = Module.cwrap("archive_entry_size_is_set", "boolean", ["number"]);
 Module.entry_filetype = Module.cwrap("archive_entry_filetype", "number", ["number"]);
+Module.entry_perm = Module.cwrap("archive_entry_perm", "number", ["number"]);
 Module.entry_mode = Module.cwrap("archive_entry_mode", "number", ["number"]);
 Module.read_next_header2 = Module.cwrap("archive_read_next_header2", "number", ["number", "number"], {async: true});
 Module.read_data_block_int = Module.cwrap("archive_read_data_block", "number", ["number", "number", "number", "number"], {async: true});

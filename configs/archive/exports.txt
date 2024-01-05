@@ -13,6 +13,7 @@
 "_yalap_entry_set_size64",
 "_archive_entry_unset_size",
 "_archive_entry_set_filetype",
+"_archive_entry_set_perm",
 "_archive_entry_set_mode",
 "_archive_write_header",
 "_archive_write_data",
