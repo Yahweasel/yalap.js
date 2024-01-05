@@ -19,7 +19,10 @@ const fs = require("fs");
 
 const configs = [
     ["zip", ["write", "zip", "zlib"]],
-    ["7zip", ["write", "7zip", "zlib", "bz2", "lzma"]]
+    ["7zip", ["write", "7zip", "zlib", "libbz2", "liblzma"]],
+    ["tar", [
+        "write", "tar", "gzip", "zlib", "bzip2", "libbz2", "xz", "liblzma"
+    ]]
 ];
 
 async function main() {
