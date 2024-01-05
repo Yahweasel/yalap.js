@@ -47,6 +47,8 @@ node_modules/.bin/uglifyjs:
 clean:
 	rm -rf dist build/inst
 	rm -rf build/zlib-$(ZLIB_VERSION)
+	rm -rf build/bzip2-$(BZIP2_VERSION)
+	rm -rf build/xz-$(LZMA_VERSION)
 	rm -rf build/libarchive-$(LIBARCHIVE_VERSION)
 
 distclean: clean
