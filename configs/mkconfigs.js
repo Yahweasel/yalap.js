@@ -19,9 +19,27 @@ const fs = require("fs");
 
 const configs = [
     ["zip", ["write", "zip", "zlib"]],
+    ["unzip", ["read", "unzip", "zlib", "libbz2", "liblzma"]],
+    ["arcex-zip", [
+        "write", "read", "zip", "unzip", "zlib", "libbz2", "liblzma"
+    ]],
+
     ["7zip", ["write", "7zip", "zlib", "libbz2", "liblzma"]],
+    ["un7zip", ["read", "un7zip", "zlib", "libbz2", "liblzma"]],
+    ["arcex-7zip", [
+        "write", "read", "7zip", "un7zip", "zlib", "libbz2", "liblzma"
+    ]],
+
     ["tar", [
         "write", "tar", "gzip", "zlib", "bzip2", "libbz2", "xz", "liblzma"
+    ]],
+    ["untar", [
+        "read", "untar", "gunzip", "zlib", "bunzip2", "libbz2", "unxz",
+        "liblzma"
+    ]],
+    ["arcex-tar", [
+        "write", "read", "tar", "untar", "gzip", "gunzip", "zlib", "bzip2",
+        "bunzip2", "libbz2", "xz", "unxz", "liblzma"
     ]]
 ];
 

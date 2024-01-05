@@ -36,6 +36,7 @@ Module.write_set_format_option = Module.cwrap("archive_write_set_format_option",
 Module.write_set_option = Module.cwrap("archive_write_set_option", "number", ["number", "string", "string", "string"]);
 Module.write_open_js = Module.cwrap("yalap_write_open_js", "number", ["number", "string"]);
 Module.entry_update_pathname_utf8 = Module.cwrap("archive_entry_update_pathname_utf8", "number", ["number", "string"]);
+Module.entry_default_stat = Module.cwrap("yalap_entry_default_stat", null, ["number"]);
 Module.entry_set_size64 = Module.cwrap("yalap_entry_set_size64", null, ["number", "number", "number"]);
 Module.entry_set_size = function(arc, size) { Module.entry_set_size64(arc, ~~size, Math.floor(size / 0x100000000)); };
 Module.entry_unset_size = Module.cwrap("archive_entry_unset_size", null, ["number"]);
@@ -49,16 +50,18 @@ Module.write_data = function(arc, data, size) {
         typeof size === "number") {
         return Module.write_data_int(arc, data, size);
 
-    } else if (data.buffer || data instanceof ArrayBuffer) {
+    } else if (data && (data.buffer || data instanceof ArrayBuffer)) {
         if (data.buffer)
-            data = data.buffer;
-        data = new Uint8Array(data);
+            data = new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+        else
+            data = new Uint8Array(data);
         var ptr = Module.malloc(data.length);
         if (!ptr)
-            return -1;
+            return -30;
         Module.HEAPU8.set(data, ptr);
         var ret = Module.write_data_int(arc, ptr, data.length);
         Module.free(ptr);
+        return ret;
 
     } else {
         throw new TypeError("Invalid write_data call");

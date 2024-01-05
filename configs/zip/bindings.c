@@ -4,8 +4,10 @@
  ***************/
 #include <emscripten.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include <archive.h>
 #include <archive_entry.h>
@@ -55,12 +57,19 @@ int yalap_write_free_cb(struct archive *ignore, void *name) {
 int yalap_write_open_js(struct archive *arc, const char *name) {
     char *clientName = strdup(name);
     if (!clientName)
-        return -errno;
+        return -30;
     return archive_write_open2(
         arc, (void *) clientName,
         yalap_write_open_cb, yalap_write_write_cb, yalap_write_close_cb,
         yalap_write_free_cb
     );
+}
+
+void yalap_entry_default_stat(struct archive_entry *ent) {
+    struct stat sbuf;
+    creat("default", 0644);
+    stat("default", &sbuf);
+    return archive_entry_copy_stat(ent, &sbuf);
 }
 
 void yalap_entry_set_size64(

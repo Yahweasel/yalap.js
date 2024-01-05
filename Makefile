@@ -11,7 +11,10 @@ EFLAGS=\
 
 YALAP_VERSION=0.0.1
 
-all: build-zip build-7zip build-tar
+all: \
+	build-zip build-unzip build-arcex-zip \
+	build-7zip build-un7zip build-arcex-7zip \
+	build-tar build-untar build-arcex-tar
 
 include mk/*.mk
 
@@ -29,6 +32,7 @@ dist/yalap-$(YALAP_VERSION)-%.js: configs/%/exports.txt \
 		--post-js configs/$*/post.js \
 		--extern-post-js configs/$*/extern-post.js \
 		-s "EXPORTED_FUNCTIONS=@configs/$*/exports.txt" \
+		`cat configs/$*/eflags.txt` \
 		configs/$*/bindings.c \
 		build/inst/lib/libarchive.a \
 		`cat configs/$*/libs.txt` -o $@

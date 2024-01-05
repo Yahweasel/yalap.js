@@ -18,8 +18,8 @@ const fs = require("fs");
 const name = process.argv[2];
 const parts = JSON.parse(process.argv[3]);
 const files = [
-    "bindings.c", "exports.txt", "extern-post.js", "libs.txt", "license.js",
-    "post.js"
+    "bindings.c", "eflags.txt", "exports.txt", "extern-post.js", "libs.txt",
+    "license.js", "post.js"
 ];
 const special = [
     ["exports", "txt"],

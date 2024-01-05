@@ -24,8 +24,4 @@ YALAP.funcs = [
     "malloc",
     "free"
 ];
-YALAP.callbacks = [
-    "onWriteOpen",
-    "onWrite",
-    "onWriteClose"
-];
+YALAP.callbacks = [];

@@ -1,0 +1,2 @@
+-s ASYNCIFY
+-s ASYNCIFY_IMPORTS=['yalap_read_open_cb','yalap_read_read_cb']
