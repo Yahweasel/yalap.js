@@ -1,1 +1,1 @@
-YALAP.funcs.push("read_support_format_all");
+YALAP._funcs.push("read_support_format_all");

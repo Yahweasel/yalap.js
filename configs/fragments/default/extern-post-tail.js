@@ -13,7 +13,7 @@
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-YALAP.scriptName = (typeof document !== "undefined" && document.currentScript)
+YALAP._scriptName = (typeof document !== "undefined" && document.currentScript)
     ? document.currentScript.src
     : (typeof __filename !== "undefined")
     ? __filename
@@ -38,12 +38,12 @@ Object.assign(YALAP, {
 YALAP.YALAP = function(opts) {
     var useWorker =
         typeof Worker !== "undefined" &&
-        typeof YALAP.scriptName !== "undefined" &&
+        typeof YALAP._scriptName !== "undefined" &&
         (!opts || !opts.noworker);
 
     if (useWorker) {
         var ret = {mode: "worker", _idx: 0, _rets: {}};
-        var worker = ret.worker = new Worker(YALAP.scriptName);
+        var worker = ret.worker = new Worker(YALAP._scriptName);
         var workerRes, workerRej;
         var workerP = new Promise(function(res, rej) {
             workerRes = res;
@@ -104,7 +104,7 @@ YALAP.YALAP = function(opts) {
         };
 
         return Promise.all([]).then(function() {
-            var funcs = YALAP.funcs;
+            var funcs = YALAP._funcs;
 
             for (var fi = 0; fi < funcs.length; fi++) (function(func) {
                 ret[func] = function() {
@@ -141,7 +141,7 @@ YALAP.YALAP = function(opts) {
         }).then(function(module) {
             ret.module = module;
 
-            var funcs = YALAP.funcs;
+            var funcs = YALAP._funcs;
             for (var fi = 0; fi < funcs.length; fi++) (function(func) {
                 ret[func] = function() {
                     var args = arguments;
@@ -151,7 +151,7 @@ YALAP.YALAP = function(opts) {
                 };
             })(funcs[fi]);
 
-            funcs = YALAP.callbacks;
+            funcs = YALAP._callbacks;
             for (var fi = 0; fi < funcs.length; fi++) (function(func) {
                 module[func] = function() {
                     if (ret[func])
@@ -191,7 +191,7 @@ if (typeof importScripts !== "undefined") (function() {
         var rets = {};
 
         // Prepare our callbacks
-        var funcs = YALAP.callbacks;
+        var funcs = YALAP._callbacks;
         for (var fi = 0; fi < funcs.length; fi++) (function(func) {
             module[func] = function() {
                 var i = idx++;

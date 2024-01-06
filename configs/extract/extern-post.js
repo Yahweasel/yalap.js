@@ -17,7 +17,7 @@
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-YALAP.funcs = [
+YALAP._funcs = [
     "version_number",
     "version_string",
     "error_string",
@@ -28,18 +28,18 @@ YALAP.funcs = [
     "malloc",
     "free"
 ];
-YALAP.callbacks = [];
-YALAP.funcs.push("read_new", "read_set_filter_option", "read_set_format_option", "read_set_option", "read_open_js", "entry_pathname", "entry_size", "entry_size_is_set", "entry_filetype", "entry_perm", "entry_mode", "read_next_header2", "read_data_block", "read_close", "read_free", "entry_mtime", "entry_mtime_nsec", "entry_mtime_is_set");
-YALAP.callbacks.push("onReadOpen", "onRead", "onReadClose");
-YALAP.funcs.push("read_support_format_zip");
-YALAP.funcs.push("read_support_format_zip_streamable");
-YALAP.funcs.push("read_support_format_7zip");
-YALAP.funcs.push("read_support_format_tar");
-YALAP.funcs.push("read_support_filter_gzip");
-YALAP.funcs.push("read_support_filter_bzip2");
-YALAP.funcs.push("read_support_filter_xz");
-YALAP.funcs.push("read_support_format_all");
-YALAP.funcs.push("read_support_filter_all");
+YALAP._callbacks = [];
+YALAP._funcs.push("read_new", "read_set_filter_option", "read_set_format_option", "read_set_option", "read_open_js", "entry_pathname", "entry_size", "entry_size_is_set", "entry_filetype", "entry_perm", "entry_mode", "read_next_header2", "read_data_block", "read_close", "read_free", "entry_mtime", "entry_mtime_nsec", "entry_mtime_is_set");
+YALAP._callbacks.push("onReadOpen", "onRead", "onReadClose");
+YALAP._funcs.push("read_support_format_zip");
+YALAP._funcs.push("read_support_format_zip_streamable");
+YALAP._funcs.push("read_support_format_7zip");
+YALAP._funcs.push("read_support_format_tar");
+YALAP._funcs.push("read_support_filter_gzip");
+YALAP._funcs.push("read_support_filter_bzip2");
+YALAP._funcs.push("read_support_filter_xz");
+YALAP._funcs.push("read_support_format_all");
+YALAP._funcs.push("read_support_filter_all");
 /*
  * Copyright (C) 2024 Yahweasel
  *
@@ -55,7 +55,7 @@ YALAP.funcs.push("read_support_filter_all");
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-YALAP.scriptName = (typeof document !== "undefined" && document.currentScript)
+YALAP._scriptName = (typeof document !== "undefined" && document.currentScript)
     ? document.currentScript.src
     : (typeof __filename !== "undefined")
     ? __filename
@@ -80,12 +80,12 @@ Object.assign(YALAP, {
 YALAP.YALAP = function(opts) {
     var useWorker =
         typeof Worker !== "undefined" &&
-        typeof YALAP.scriptName !== "undefined" &&
+        typeof YALAP._scriptName !== "undefined" &&
         (!opts || !opts.noworker);
 
     if (useWorker) {
         var ret = {mode: "worker", _idx: 0, _rets: {}};
-        var worker = ret.worker = new Worker(YALAP.scriptName);
+        var worker = ret.worker = new Worker(YALAP._scriptName);
         var workerRes, workerRej;
         var workerP = new Promise(function(res, rej) {
             workerRes = res;
@@ -146,7 +146,7 @@ YALAP.YALAP = function(opts) {
         };
 
         return Promise.all([]).then(function() {
-            var funcs = YALAP.funcs;
+            var funcs = YALAP._funcs;
 
             for (var fi = 0; fi < funcs.length; fi++) (function(func) {
                 ret[func] = function() {
@@ -183,7 +183,7 @@ YALAP.YALAP = function(opts) {
         }).then(function(module) {
             ret.module = module;
 
-            var funcs = YALAP.funcs;
+            var funcs = YALAP._funcs;
             for (var fi = 0; fi < funcs.length; fi++) (function(func) {
                 ret[func] = function() {
                     var args = arguments;
@@ -193,7 +193,7 @@ YALAP.YALAP = function(opts) {
                 };
             })(funcs[fi]);
 
-            funcs = YALAP.callbacks;
+            funcs = YALAP._callbacks;
             for (var fi = 0; fi < funcs.length; fi++) (function(func) {
                 module[func] = function() {
                     if (ret[func])
@@ -233,7 +233,7 @@ if (typeof importScripts !== "undefined") (function() {
         var rets = {};
 
         // Prepare our callbacks
-        var funcs = YALAP.callbacks;
+        var funcs = YALAP._callbacks;
         for (var fi = 0; fi < funcs.length; fi++) (function(func) {
             module[func] = function() {
                 var i = idx++;

@@ -13,7 +13,7 @@
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-YALAP.funcs = [
+YALAP._funcs = [
     "version_number",
     "version_string",
     "error_string",
@@ -24,4 +24,4 @@ YALAP.funcs = [
     "malloc",
     "free"
 ];
-YALAP.callbacks = [];
+YALAP._callbacks = [];

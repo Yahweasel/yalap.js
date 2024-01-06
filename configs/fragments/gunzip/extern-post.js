@@ -1,1 +1,1 @@
-YALAP.funcs.push("read_support_filter_gzip");
+YALAP._funcs.push("read_support_filter_gzip");
