@@ -84,6 +84,7 @@ YALAP.YALAP = function(opts) {
             workerRes = res;
             workerRej = rej;
         });
+        ret.terminate = worker.terminate.bind(worker);
 
         worker.onmessage = function(ev) {
             var msg = ev.data;
@@ -169,7 +170,7 @@ YALAP.YALAP = function(opts) {
         });
 
     } else {
-        var ret = {mode: "direct"};
+        var ret = {mode: "direct", terminate: function() {}};
         return Promise.all([]).then(function() {
             return YALAP();
         }).then(function(module) {

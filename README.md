@@ -131,3 +131,11 @@ argument, in which case it will return an object of the form
 Like with `onWrite`, the buffer is now owned by you, and will not alias
 anything. Note that if `read_data_block` fails, the return will be a number (the
 error code, as in the native interface), *not* this object.
+
+Because `YALAP.YALAP()` may return an object backed by a worker thread, when you
+are done with it, you must call `terminate`. `terminate` does nothing when not
+backed by a worker thread, and terminates the worker thread when one is in use.
+
+```js
+la.terminate();
+```
