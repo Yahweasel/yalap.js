@@ -45,10 +45,22 @@ whatever you want; `YALAP` is the export).
 
 `YALAP.YALAP` is an asynchronous factory function which creates yalap.js
 instances. Instances expose the libarchive API directly, at a low level, but
-without the `archive_` prefix. For instance:
+without the `archive_` prefix. `YALAP.YALAP` takes an (optional) options object,
+of the form:
 
 ```js
-const la = await YALAP.YALAP();
+{
+    noworker /* : boolean */
+}
+```
+
+If `noworker` is set to `true`, yalap.js will load synchronously, and not use a
+worker. This is most likely useful if you're already in a worker.
+
+The following begins an example of using yalap.js:
+
+```js
+const la = await YALAP.YALAP({noworker: false} /* this is optional */);
 const arc = await la.write_new();
 await la.write_set_format_zip(arc);
 await la.write_set_bytes_in_last_block(arc, 1);
