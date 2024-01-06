@@ -13,7 +13,7 @@ build/xz-$(LZMA_VERSION)/build/config.h: build/xz-$(LZMA_VERSION)/configure
 			--enable-threads=no --enable-small \
 			--disable-xz --disable-xzdec --disable-lzmadec \
 			--disable-lzmainfo \
-			CFLAGS=-Oz
+			CFLAGS="$(CFLAGS)"
 	touch $@
 
 build/xz-$(LZMA_VERSION)/configure: build/xz-$(LZMA_VERSION).tar.xz

@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/Yahweasel/yalap#readme",
   "devDependencies": {
+    "typescript": "^5.3.3",
     "uglify-js": "^3.17.4"
   }
 }

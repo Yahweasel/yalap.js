@@ -17,7 +17,8 @@ build/libarchive-$(LIBARCHIVE_VERSION)/wasm/config.h: \
 		--prefix="$(PWD)/build/inst" \
 		--enable-static --disable-shared \
 		LDFLAGS="-L$(PWD)/build/inst/lib" \
-		CFLAGS="-Oz -I$(PWD)/build/inst/include"
+		CFLAGS="$(CFLAGS)" \
+		CPPFLAGS="-I$(PWD)/build/inst/include"
 
 build/libarchive-$(LIBARCHIVE_VERSION)/configure: \
 	build/libarchive-$(LIBARCHIVE_VERSION).tar.xz

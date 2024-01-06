@@ -11,7 +11,7 @@ build/inst/include/bzlib.h: build/bzip2-$(BZIP2_VERSION)/Makefile
 
 build/bzip2-$(BZIP2_VERSION)/libbz2.a: build/bzip2-$(BZIP2_VERSION)/Makefile
 	cd build/bzip2-$(BZIP2_VERSION) && \
-		$(MAKE) CC=emcc AR=emar RANLIB=emranlib CFLAGS=-Oz libbz2.a
+		$(MAKE) CC=emcc AR=emar RANLIB=emranlib CFLAGS="$(CFLAGS)" libbz2.a
 
 build/bzip2-$(BZIP2_VERSION)/Makefile: build/bzip2-$(BZIP2_VERSION).tar.gz
 	cd build && tar zxf bzip2-$(BZIP2_VERSION).tar.gz

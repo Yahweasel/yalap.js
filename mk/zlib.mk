@@ -7,7 +7,7 @@ build/inst/lib/pkgconfig/zlib.pc: build/zlib-$(ZLIB_VERSION)/build/config.h
 build/zlib-$(ZLIB_VERSION)/build/config.h: build/zlib-$(ZLIB_VERSION)/configure
 	mkdir -p build/zlib-$(ZLIB_VERSION)/build
 	cd build/zlib-$(ZLIB_VERSION)/build && \
-		env CFLAGS="-Oz" \
+		env CFLAGS="$(CFLAGS)" \
 		CHOST=emscripten \
 		emconfigure ../configure \
 			--prefix="$(PWD)/build/inst" \

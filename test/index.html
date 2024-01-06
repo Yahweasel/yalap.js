@@ -1,5 +1,12 @@
-const YALAP = require("../dist/yalap-0.0.1-all.js");
-
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Test</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="../dist/yalap-0.0.1-all.js"></script>
+        <script type="text/javascript">
 async function main() {
     const la = await YALAP.YALAP();
     const ent = await la.entry_new();
@@ -35,7 +42,7 @@ async function main() {
 
         await la.read_open_js(arc, "in");
         await la.read_next_header2(arc, ent);
-        console.log(await la.entry_pathname(ent));
+        await la.entry_pathname(ent);
         console.log(await la.read_data_block(arc));
         await la.read_free(arc);
     }
@@ -43,3 +50,6 @@ async function main() {
     await la.entry_free(ent);
 }
 main();
+        </script>
+    </body>
+</html>
