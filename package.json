@@ -3,6 +3,21 @@
   "version": "0.0.1",
   "description": "Yet another libarchive port to JavaScript/WebAssembly. Aims to have feature-reduced builds that aren't bloated by tasks you don't need.",
   "main": "dist/yalap-0.0.1-all.js",
+  "exports": {
+      ".": "./dist/yalap-0.0.1-all.js",
+      "./archive": "./dist/yalap-0.0.1-archive.js",
+      "./extract": "./dist/yalap-0.0.1-extract.js",
+      "./all": "./dist/yalap-0.0.1-all.js",
+      "./zip": "./dist/yalap-0.0.1-zip.js",
+      "./unzip": "./dist/yalap-0.0.1-unzip.js",
+      "./arcex-zip": "./dist/yalap-0.0.1-arcex-zip.js",
+      "./7zip": "./dist/yalap-0.0.1-7zip.js",
+      "./un7zip": "./dist/yalap-0.0.1-un7zip.js",
+      "./arcex-7zip": "./dist/yalap-0.0.1-arcex-7zip.js",
+      "./tar": "./dist/yalap-0.0.1-tar.js",
+      "./untar": "./dist/yalap-0.0.1-untar.js",
+      "./arcex-tar": "./dist/yalap-0.0.1-arcex-tar.js"
+  },
   "directories": {
     "test": "test"
   },
