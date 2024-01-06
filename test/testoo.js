@@ -1,4 +1,4 @@
-const YALAP = require("../dist/yalapo-0.0.1-all.js");
+const YALAP = require("../dist/yalap-0.0.1-all.js");
 
 async function main() {
     const la = await YALAP.YALAP();

@@ -19,7 +19,7 @@ const name = process.argv[2];
 const parts = JSON.parse(process.argv[3]);
 const files = [
     "bindings.c", "eflags.txt", "exports.txt", "extern-post.js", "libs.txt",
-    "license.js", "post.js"
+    "license.js", "oo.txt", "post.js"
 ];
 const special = [
     ["exports", "txt"],
@@ -84,6 +84,16 @@ function addFragment(out, part) {
         out[`${file[0]}.${file[1]}`].write(
             fs.readFileSync(`fragments/default/${file[0]}-tail.${file[1]}`)
         );
+    }
+
+    // Mark the OO content needed
+    if (parts.indexOf("write") >= 0) {
+        if (parts.indexOf("read") >= 0)
+            out["oo.txt"].write("oo/yalapo.js\n");
+        else
+            out["oo.txt"].write("oo/yalapw.js\n");
+    } else {
+        out["oo.txt"].write("oo/yalapr.js\n");
     }
 
     // Close everything
