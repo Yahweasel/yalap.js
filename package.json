@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Yahweasel/yalap.git"
+    "url": "git+https://github.com/Yahweasel/yalap.js.git"
   },
   "keywords": [
     "libarchive",
@@ -41,9 +41,9 @@
   "author": "Yahweasel",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/Yahweasel/yalap/issues"
+    "url": "https://github.com/Yahweasel/yalap.js/issues"
   },
-  "homepage": "https://github.com/Yahweasel/yalap#readme",
+  "homepage": "https://github.com/Yahweasel/yalap.js#readme",
   "devDependencies": {
     "typescript": "^5.3.3",
     "uglify-js": "^3.17.4"
