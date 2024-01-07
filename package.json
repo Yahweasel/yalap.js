@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Yet another libarchive port to JavaScript/WebAssembly. Aims to have feature-reduced builds that aren't bloated by tasks you don't need.",
   "main": "dist/yalap-0.0.1-all.js",
+  "types": "yalap.d.ts",
   "exports": {
       ".": "./dist/yalap-0.0.1-all.js",
       "./archive": "./dist/yalap-0.0.1-archive.js",
