@@ -51,7 +51,7 @@ declare let YALAP: any;
         }
 
         async addFile(
-            pathname: string, props: Record<string, any> | null
+            pathname: string, props?: Record<string, any>
         ): Promise<void> {
             const module = this._module, arc = this._arc, ent = this._ent;
             props = props || Object.create(null);
@@ -105,6 +105,7 @@ declare let YALAP: any;
 
     YALAP.YALAPW = async function(opts: any) {
         let format: string = (opts && opts.format) ? opts.format : "zip";
+        let filter: string | null = (opts && opts.format) ? opts.format : null;
 
         // Create the module
         const module = await YALAP.YALAP(opts);
@@ -113,14 +114,28 @@ declare let YALAP: any;
         const arc: number = await module.write_new();
 
         // Set its format
-        const setter = "write_set_format_" + format;
-        let sret: number;
-        if (module[setter])
-            sret = await module[setter](arc);
-        else
-            sret = await module.write_set_format_by_name(arc, format);
-        if (sret < 0)
-            await YALAP._error(module, arc);
+        {
+            const setter = "write_set_format_" + format;
+            let sret: number;
+            if (module[setter])
+                sret = await module[setter](arc);
+            else
+                sret = await module.write_set_format_by_name(arc, format);
+            if (sret < 0)
+                await YALAP._error(module, arc);
+        }
+
+        // And filter, if applicable
+        if (filter) {
+            const setter = "write_set_filter_" + format;
+            let sret: number;
+            if (module[setter])
+                sret = await module[setter](arc);
+            else
+                sret = await module.write_set_filter_by_name(arc, filter);
+            if (sret < 0)
+                await YALAP._error(module, arc);
+        }
 
         // Defaults
         if (typeof opts.bytesPerBlock === "number")

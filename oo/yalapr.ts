@@ -97,8 +97,8 @@ declare let YALAP: any;
     YALAP.YALAPR = async function(
         stream: ReadableStream<Uint8Array>, opts: any
     ) {
-        let filters: string[] =
-            (opts && opts.filters) ? opts.filters : [];
+        let filters: string[] | null =
+            (opts && opts.filters) ? opts.filters : null;
         let formats: string[] | null =
             (opts && opts.formats) ? opts.formats : null;
 
@@ -117,6 +117,19 @@ declare let YALAP: any;
 
         // Create the extractor
         const arc: number = await module.read_new();
+
+        // Maybe support all filters
+        if (!filters) {
+            if (module.read_support_filter_all) {
+                filters = ["all"];
+            } else {
+                filters = [];
+                for (const key in module) {
+                    if (/^read_support_filter_/.test(key))
+                        filters.push(key.slice(20));
+                }
+            }
+        }
 
         // Support the filters
         for (const filter of filters)
