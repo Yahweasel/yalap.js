@@ -168,6 +168,12 @@ declare let YALAP: any;
                 await YALAP._error(module, arc);
         }
 
+        // Options
+        if (opts && opts.options) {
+            if (await module.write_set_options(arc, opts.options) < 0)
+                await YALAP._error(module, arc);
+        }
+
         // Defaults
         if (typeof opts.bytesPerBlock === "number")
             await module.write_set_bytes_per_block(arc, opts.bytesPerBlock);

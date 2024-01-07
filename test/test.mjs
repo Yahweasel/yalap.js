@@ -17,7 +17,7 @@ import * as fs from "fs/promises";
 
 import YALAP from "../dist/yalap-0.0.1-all.js";
 
-const w = await YALAP.YALAPW({format: "zip"});
+const w = await YALAP.YALAPW({format: "zip", options: "compression-level=9"});
 (async function() {
     async function addDir(dir) {
         for (let file of await fs.readdir(dir)) {

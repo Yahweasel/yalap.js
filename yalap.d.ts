@@ -68,6 +68,11 @@ declare namespace YALAP {
         filter?: string | null;
 
         /**
+         * Options passed to archive_write_set_options.
+         */
+        options?: string;
+
+        /**
          * Number of bytes per block sent to the output stream. Set to 0 to not
          * buffer. Default set by libarchive.
          */
@@ -94,6 +99,11 @@ declare namespace YALAP {
          * Filters to support. Defaults to all supported by the loaded library.
          */
         filters?: string[];
+
+        /**
+         * Options passed to archive_read_set_options.
+         */
+        options?: string;
     }
 
     /**
@@ -271,6 +281,7 @@ declare namespace YALAP {
         write_set_filter_option(arc: number, module: string, option: string, value: string): Promise<number>;
         write_set_format_option(arc: number, module: string, option: string, value: string): Promise<number>;
         write_set_option(arc: number, module: string, option: string, value: string): Promise<number>;
+        write_set_options(arc: number, options: string): Promise<number>;
         write_open_js(arc: number, name: string): Promise<number>;
 
         entry_update_pathname_utf8(ent: number, pathname: string): Promise<number>;
@@ -327,6 +338,7 @@ declare namespace YALAP {
         read_set_filter_option(arc: number, module: string, option: string, value: string): Promise<number>;
         read_set_format_option(arc: number, module: string, option: string, value: string): Promise<number>;
         read_set_option(arc: number, module: string, option: string, value: string): Promise<number>;
+        read_set_options(arc: number, options: string): Promise<number>;
         read_open_js(arc: number, name: string): Promise<number>;
 
         entry_pathname(ent: number): Promise<string>;

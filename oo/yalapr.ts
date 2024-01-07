@@ -164,6 +164,12 @@ declare let YALAP: any;
         for (const format of formats)
             await module["read_support_format_" + format](arc);
 
+        // Options
+        if (opts && opts.options) {
+            if (await module.read_set_options(arc, opts.options) < 0)
+                await YALAP._error(module, arc);
+        }
+
         // Attempt to open the file
         if (await module.read_open_js(arc, "r") < 0)
             await YALAP._error(module, arc);

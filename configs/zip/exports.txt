@@ -7,6 +7,7 @@
 "_archive_write_set_filter_option",
 "_archive_write_set_format_option",
 "_archive_write_set_option",
+"_archive_write_set_options",
 "_yalap_write_open_js",
 "_archive_entry_update_pathname_utf8",
 "_yalap_entry_default_stat",

@@ -29,7 +29,7 @@ YALAP._funcs = [
     "free"
 ];
 YALAP._callbacks = [];
-YALAP._funcs.push("read_new", "read_set_filter_option", "read_set_format_option", "read_set_option", "read_open_js", "entry_pathname", "entry_size", "entry_size_is_set", "entry_filetype", "entry_perm", "entry_mode", "read_next_header2", "read_data_block", "read_close", "read_free", "entry_mtime", "entry_mtime_nsec", "entry_mtime_is_set");
+YALAP._funcs.push("read_new", "read_set_filter_option", "read_set_format_option", "read_set_option", "read_set_options", "read_open_js", "entry_pathname", "entry_size", "entry_size_is_set", "entry_filetype", "entry_perm", "entry_mode", "read_next_header2", "read_data_block", "read_close", "read_free", "entry_mtime", "entry_mtime_nsec", "entry_mtime_is_set");
 YALAP._callbacks.push("onReadOpen", "onRead", "onReadClose");
 YALAP._funcs.push("read_support_format_tar");
 YALAP._funcs.push("read_support_filter_gzip");

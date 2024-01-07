@@ -3,6 +3,7 @@
 "_archive_read_set_filter_option",
 "_archive_read_set_format_option",
 "_archive_read_set_option",
+"_archive_read_set_options",
 "_yalap_read_open_js",
 "_archive_entry_pathname",
 "_yalap_entry_size",

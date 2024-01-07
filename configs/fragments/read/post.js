@@ -17,6 +17,7 @@ Module.read_new = Module.cwrap("archive_read_new", "number", []);
 Module.read_set_filter_option = Module.cwrap("archive_read_set_filter_option", "number", ["number", "string", "string", "string"]);
 Module.read_set_format_option = Module.cwrap("archive_read_set_format_option", "number", ["number", "string", "string", "string"]);
 Module.read_set_option = Module.cwrap("archive_read_set_option", "number", ["number", "string", "string", "string"]);
+Module.read_set_options = Module.cwrap("archive_read_set_options", "number", ["number", "string"]);
 Module.read_open_js = Module.cwrap("yalap_read_open_js", "number", ["number", "string"], {async: true});
 Module.entry_pathname = Module.cwrap("archive_entry_pathname", "string", ["number"]);
 Module.entry_size = Module.cwrap("yalap_entry_size", "number", ["number"]);

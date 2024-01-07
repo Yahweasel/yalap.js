@@ -34,6 +34,7 @@ Module.write_set_bytes_in_last_block = Module.cwrap("archive_write_set_bytes_in_
 Module.write_set_filter_option = Module.cwrap("archive_write_set_filter_option", "number", ["number", "string", "string", "string"]);
 Module.write_set_format_option = Module.cwrap("archive_write_set_format_option", "number", ["number", "string", "string", "string"]);
 Module.write_set_option = Module.cwrap("archive_write_set_option", "number", ["number", "string", "string", "string"]);
+Module.write_set_options = Module.cwrap("archive_write_set_options", "number", ["number", "string"]);
 Module.write_open_js = Module.cwrap("yalap_write_open_js", "number", ["number", "string"]);
 Module.entry_update_pathname_utf8 = Module.cwrap("archive_entry_update_pathname_utf8", "number", ["number", "string"]);
 Module.entry_default_stat = Module.cwrap("yalap_entry_default_stat", null, ["number"]);
