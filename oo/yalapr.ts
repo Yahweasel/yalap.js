@@ -24,13 +24,13 @@ declare let YALAP: any;
 
     class YALAPR {
         constructor(module: any, arc: number, ent: number) {
-            this._module = module;
-            this._arc = arc;
-            this._ent = ent;
+            this.yalap = module;
+            this.arc = arc;
+            this.ent = ent;
         }
 
         async nextFile(): Promise<ReadableFile | null> {
-            const module = this._module, arc = this._arc, ent = this._ent;
+            const module = this.yalap, arc = this.arc, ent = this.ent;
 
             await this._flush();
 
@@ -84,7 +84,7 @@ declare let YALAP: any;
         }
 
         async free(): Promise<void> {
-            const module = this._module, arc = this._arc, ent = this._ent;
+            const module = this.yalap, arc = this.arc, ent = this.ent;
             await this._flush();
             if (await module.read_free(arc) < 0)
                 await YALAP._error(module, arc);
@@ -100,9 +100,9 @@ declare let YALAP: any;
             }
         }
 
-        private _module: any;
-        private _arc: number;
-        private _ent: number;
+        yalap: any;
+        arc: number;
+        ent: number;
         private _stream: ReadableStream<Uint8Array> | null = null;
     }
 

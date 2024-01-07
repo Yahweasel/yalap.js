@@ -18,9 +18,9 @@ declare let YALAP: any;
 (function() {
     class YALAPW {
         constructor(module: any, arc: number, ent: number) {
-            this._module = module;
-            this._arc = arc;
-            this._ent = ent;
+            this.yalap = module;
+            this.arc = arc;
+            this.ent = ent;
 
             // Set up a readable stream for the data
             var bufs: (Uint8Array | null)[] = [];
@@ -53,7 +53,7 @@ declare let YALAP: any;
         async addFileHeader(
             pathname: string, props?: Record<string, any>
         ): Promise<void> {
-            const module = this._module, arc = this._arc, ent = this._ent;
+            const module = this.yalap, arc = this.arc, ent = this.ent;
             props = props || Object.create(null);
 
             // Start with the defaults
@@ -113,13 +113,13 @@ declare let YALAP: any;
         }
 
         async write(data: Uint8Array): Promise<void> {
-            const module = this._module, arc = this._arc;
+            const module = this.yalap, arc = this.arc;
             if (await module.write_data(arc, data) < 0)
                 await YALAP._error(module, arc);
         }
 
         async free(): Promise<void> {
-            const module = this._module, arc = this._arc, ent = this._ent;
+            const module = this.yalap, arc = this.arc, ent = this.ent;
             if (await module.write_free(arc) < 0)
                 return YALAP._error(module, arc);
             module.onWrite("w", null);
@@ -129,9 +129,9 @@ declare let YALAP: any;
 
         stream: ReadableStream<Uint8Array>;
 
-        private _module: any;
-        private _arc: number;
-        private _ent: number;
+        yalap: any;
+        arc: number;
+        ent: number;
     }
 
     YALAP.YALAPW = async function(opts: any) {

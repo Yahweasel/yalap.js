@@ -165,6 +165,24 @@ declare namespace YALAP {
          * finished to finalize the file.
          */
         free(): Promise<void>;
+
+        /**
+         * The underlying yalap.js instance. Available if you need advanced
+         * functionality.
+         */
+        readonly yalap: YALAP;
+
+        /**
+         * The underlying struct archive *. Available if you need advanced
+         * functionality.
+         */
+        readonly arc: number;
+
+        /**
+         * The underlying struct archive_entity *. Available if you need
+         * advanced functionality.
+         */
+        readonly ent: number;
     }
 
     /**
@@ -182,6 +200,24 @@ declare namespace YALAP {
          * finished to clean up.
          */
         free(): Promise<void>;
+
+        /**
+         * The underlying yalap.js instance. Available if you need advanced
+         * functionality.
+         */
+        readonly yalap: YALAP;
+
+        /**
+         * The underlying struct archive *. Available if you need advanced
+         * functionality.
+         */
+        readonly arc: number;
+
+        /**
+         * The underlying struct archive_entity *. Available if you need
+         * advanced functionality.
+         */
+        readonly ent: number;
     }
 
     /**
