@@ -32,6 +32,8 @@ declare let YALAP: any;
         async nextFile(): Promise<ReadableFile | null> {
             const module = this._module, arc = this._arc, ent = this._ent;
 
+            await this._flush();
+
             // Read the next header
             const hret = await module.read_next_header2(arc, ent);
             if (hret < 0)
@@ -60,7 +62,7 @@ declare let YALAP: any;
 
             // Create a stream for the data
             let offset = 0;
-            file.stream = new ReadableStream({
+            this._stream = file.stream = new ReadableStream({
                 async pull(controller) {
                     const block = await module.read_data_block(arc);
                     if (typeof block === "number") {
@@ -83,15 +85,25 @@ declare let YALAP: any;
 
         async free(): Promise<void> {
             const module = this._module, arc = this._arc, ent = this._ent;
+            await this._flush();
             if (await module.read_free(arc) < 0)
                 await YALAP._error(module, arc);
             await module.entry_free(ent);
             module.terminate();
         }
 
+        async _flush(): Promise<void> {
+            if (this._stream && !this._stream.locked) {
+                const rdr = this._stream.getReader();
+                this._stream = null;
+                while (!(await rdr.read()).done) {}
+            }
+        }
+
         private _module: any;
         private _arc: number;
         private _ent: number;
+        private _stream: ReadableStream<Uint8Array> | null = null;
     }
 
     YALAP.YALAPR = async function(

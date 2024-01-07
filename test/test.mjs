@@ -38,6 +38,7 @@ const r = await YALAP.YALAPR(w.stream);
 (async function() {
     let file;
     while (file = await r.nextFile()) {
+        console.log(file.pathname);
         const bufs = [];
         const rdr = file.stream.getReader();
         while (true) {
