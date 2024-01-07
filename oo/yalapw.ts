@@ -50,7 +50,7 @@ declare let YALAP: any;
             };
         }
 
-        async addFile(
+        async addFileHeader(
             pathname: string, props?: Record<string, any>
         ): Promise<void> {
             const module = this._module, arc = this._arc, ent = this._ent;
@@ -81,6 +81,37 @@ declare let YALAP: any;
                 await YALAP._error(module, arc);
         }
 
+        async addFile(
+            pathname: string, data: ReadableStream<Uint8Array>,
+            props?: Record<string, any>
+        ) {
+            await this.addFileHeader(pathname, props);
+            const rdr = data.getReader();
+            while (true) {
+                const rd = await rdr.read();
+                if (rd.done)
+                    break;
+                await this.write(rd.value);
+            }
+        }
+
+        async addFileData(
+            pathname: string, data: Uint8Array | ArrayBuffer | string,
+            props?: Record<string, any>
+        ) {
+            await this.addFileHeader(pathname, props);
+            if ((<any> data).buffer) {
+                const d = <Uint8Array> data;
+                await this.write(new Uint8Array(
+                    d.buffer, d.byteOffset, d.byteLength
+                ));
+            } else if (data instanceof ArrayBuffer) {
+                await this.write(new Uint8Array(data));
+            } else {
+                await this.write((new TextEncoder()).encode("" + data));
+            }
+        }
+
         async write(data: Uint8Array): Promise<void> {
             const module = this._module, arc = this._arc;
             if (await module.write_data(arc, data) < 0)
@@ -105,7 +136,7 @@ declare let YALAP: any;
 
     YALAP.YALAPW = async function(opts: any) {
         let format: string = (opts && opts.format) ? opts.format : "zip";
-        let filter: string | null = (opts && opts.format) ? opts.format : null;
+        let filter: string | null = (opts && opts.filter) ? opts.filter : null;
 
         // Create the module
         const module = await YALAP.YALAP(opts);

@@ -107,7 +107,9 @@ declare namespace YALAP {
 
         /**
          * Begin the next file in this archive. Writes from this point until the
-         * next addFile will write to the described file.
+         * next addFile* will write to the described file. You're recommended to
+         * use one of the other addFiles instead, which take both the properties
+         * and the data at once.
          * @param pathname  Filename to write.
          * @param props  Any other metadata. If unspecified, all properties will
          *               be default. Each property here calls an `entry_set_*`
@@ -115,8 +117,31 @@ declare namespace YALAP {
          *               such function corresponds to a supported property.
          *               Provide times as floating-point seconds.
          */
-        addFile(
+        addFileHeader(
             pathname: string, props?: Record<string, any>
+        ): Promise<void>;
+
+        /**
+         * Add this file, described by a stream.
+         * @param pathname  Filename to write.
+         * @param data  Data to write, as a ReadableStream.
+         * @param props  Other metadata.
+         */
+        addFile(
+            pathname: string, data: ReadableStream<Uint8Array>,
+            props?: Record<string, any>
+        ): Promise<void>;
+
+        /**
+         * Add this file, described by the entire content of the file in a
+         * buffer.
+         * @param pathname  Filename to write.
+         * @param data  Data to write.
+         * @param props  Other metadata.
+         */
+        addFileData(
+            pathname: string, data: Uint8Array | ArrayBuffer | string,
+            props?: Record<string, any>
         ): Promise<void>;
 
         /**

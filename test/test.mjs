@@ -19,26 +19,18 @@ import YALAP from "../dist/yalap-0.0.1-all.js";
 
 const w = await YALAP.YALAPW({format: "zip"});
 (async function() {
-    // Find all files
-    const allFiles = [];
     async function addDir(dir) {
         for (let file of await fs.readdir(dir)) {
             file = `${dir}/${file}`;
             const sbuf = await fs.stat(file);
-            if (sbuf.isDirectory())
-                addDir(file);
-            else if (sbuf.isFile())
-                allFiles.push(file);
+            if (sbuf.isDirectory()) {
+                await addDir(file);
+            } else if (sbuf.isFile()) {
+                await w.addFileData(file.slice(2), await fs.readFile(file));
+            }
         }
     }
     await addDir(".");
-
-    // Feed them into the writer
-    for (const file of allFiles) {
-        await w.addFile(file.slice(2));
-        await w.write(await fs.readFile(file));
-    }
-
     await w.free();
 })();
 
