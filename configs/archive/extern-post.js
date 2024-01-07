@@ -33,7 +33,7 @@ YALAP._funcs.push("write_new", "write_get_bytes_per_block", "write_set_bytes_per
 YALAP._callbacks.push("onWriteOpen", "onWrite", "onWriteClose");
 YALAP._funcs.push("write_set_format_zip");
 YALAP._funcs.push("write_set_format_7zip");
-YALAP._funcs.push("write_set_format_gnutar", "write_set_format_ustar", "write_set_format_v7tar");
+YALAP._funcs.push("write_set_format_gnutar", "write_set_format_pax", "write_set_format_pax_restricted", "write_set_format_ustar", "write_set_format_v7tar");
 YALAP._funcs.push("write_add_filter_gzip");
 YALAP._funcs.push("write_add_filter_bzip2");
 YALAP._funcs.push("write_add_filter_xz");

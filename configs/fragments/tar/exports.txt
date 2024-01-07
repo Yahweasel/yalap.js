@@ -1,3 +1,5 @@
 "_archive_write_set_format_gnutar",
+"_archive_write_set_format_pax",
+"_archive_write_set_format_pax_restricted",
 "_archive_write_set_format_ustar",
 "_archive_write_set_format_v7tar",
