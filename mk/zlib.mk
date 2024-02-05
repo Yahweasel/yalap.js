@@ -1,4 +1,4 @@
-ZLIB_VERSION=1.3
+ZLIB_VERSION=1.3.1
 
 build/inst/lib/pkgconfig/zlib.pc: build/zlib-$(ZLIB_VERSION)/build/config.h
 	cd build/zlib-$(ZLIB_VERSION)/build && \
@@ -14,10 +14,10 @@ build/zlib-$(ZLIB_VERSION)/build/config.h: build/zlib-$(ZLIB_VERSION)/configure
 			--static
 	touch $@
 
-build/zlib-$(ZLIB_VERSION)/configure: build/zlib-$(ZLIB_VERSION).tar.xz
-	cd build && tar Jxf zlib-$(ZLIB_VERSION).tar.xz
+build/zlib-$(ZLIB_VERSION)/configure: build/zlib-$(ZLIB_VERSION).tar.gz
+	cd build && tar zxf zlib-$(ZLIB_VERSION).tar.gz
 	touch $@
 
-build/zlib-$(ZLIB_VERSION).tar.xz:
+build/zlib-$(ZLIB_VERSION).tar.gz:
 	mkdir -p build
-	curl https://www.zlib.net/zlib-$(ZLIB_VERSION).tar.xz -L -o $@
+	curl https://www.zlib.net/fossils/zlib-$(ZLIB_VERSION).tar.gz -L -o $@
