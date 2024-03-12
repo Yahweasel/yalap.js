@@ -10,7 +10,7 @@ EFLAGS=\
 	-s ALLOW_MEMORY_GROWTH=1
 
 
-YALAP_VERSION=1.0.1
+YALAP_VERSION=1.0.2
 
 YALAPO_SOURCES=oo/yalapo.js oo/yalapw.js oo/yalapr.js
 

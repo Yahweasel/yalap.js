@@ -15,7 +15,7 @@
 
 import * as fs from "fs/promises";
 
-import YALAP from "../dist/yalap-1.0.1-all.js";
+import YALAP from "../dist/yalap-1.0.2-all.js";
 
 const w = await YALAP.YALAPW({format: "zip", options: "compression-level=9"});
 (async function() {
