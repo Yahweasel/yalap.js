@@ -38,6 +38,8 @@ YALAP._funcs.push("read_support_format_tar");
 YALAP._funcs.push("read_support_filter_gzip");
 YALAP._funcs.push("read_support_filter_bzip2");
 YALAP._funcs.push("read_support_filter_xz");
+YALAP._funcs.push("write_set_format_raw");
+YALAP._funcs.push("read_support_format_raw");
 YALAP._funcs.push("read_support_format_all");
 YALAP._funcs.push("read_support_filter_all");
 /*

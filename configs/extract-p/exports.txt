@@ -25,6 +25,8 @@
 "_archive_read_support_filter_gzip",
 "_archive_read_support_filter_bzip2",
 "_archive_read_support_filter_xz",
+"_archive_write_set_format_raw",
+"_archive_read_support_format_raw",
 "_archive_read_support_format_all",
 "_archive_read_support_filter_all",
 "_archive_entry_hardlink",

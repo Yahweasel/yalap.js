@@ -32,6 +32,7 @@
 "_archive_write_add_filter_gzip",
 "_archive_write_add_filter_bzip2",
 "_archive_write_add_filter_xz",
+"_archive_write_set_format_raw",
 "_archive_write_set_format_by_name",
 "_archive_write_add_filter_by_name",
 "_archive_version_number",

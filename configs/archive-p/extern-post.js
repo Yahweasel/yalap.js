@@ -37,6 +37,7 @@ YALAP._funcs.push("write_set_format_gnutar", "write_set_format_pax", "write_set_
 YALAP._funcs.push("write_add_filter_gzip");
 YALAP._funcs.push("write_add_filter_bzip2");
 YALAP._funcs.push("write_add_filter_xz");
+YALAP._funcs.push("write_set_format_raw");
 YALAP._funcs.push("write_set_format_by_name");
 YALAP._funcs.push("write_add_filter_by_name");
 YALAP._funcs.push("entry_update_hardlink_utf8", "entry_update_link_utf8", "entry_update_symlink_utf8", "entry_set_gid", "entry_set_uid", "entry_update_gname_utf8", "entry_update_uname_utf8", "entry_set_dev", "entry_set_devmajor", "entry_set_devminor", "entry_set_ino", "entry_set_ino64", "entry_set_nlink", "entry_set_rdev", "entry_set_rdevmajor", "entry_set_rdevminor", "entry_set_atime", "entry_unset_atime", "entry_set_birthtime", "entry_unset_birthtime", "entry_set_ctime", "entry_unset_ctime");

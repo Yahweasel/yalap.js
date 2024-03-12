@@ -37,6 +37,7 @@ YALAP._funcs.push("write_set_format_gnutar", "write_set_format_pax", "write_set_
 YALAP._funcs.push("write_add_filter_gzip");
 YALAP._funcs.push("write_add_filter_bzip2");
 YALAP._funcs.push("write_add_filter_xz");
+YALAP._funcs.push("write_set_format_raw");
 YALAP._funcs.push("write_set_format_by_name");
 YALAP._funcs.push("write_add_filter_by_name");
 /*

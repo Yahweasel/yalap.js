@@ -18,6 +18,8 @@ all: \
 	build-zip build-unzip build-arcex-zip \
 	build-7zip build-un7zip build-arcex-7zip \
 	build-tar build-untar build-arcex-tar \
+	build-gzip build-gunzip build-arcex-gzip \
+	build-xz build-unxz build-arcex-xz \
 	build-archive build-extract build-all
 
 include mk/*.mk

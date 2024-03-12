@@ -41,6 +41,18 @@ let formats = [
     },
 
     {
+        include: true,
+        arc: ["gzip", ["raw", "gzip", "zlib"]],
+        ext: ["gunzip", ["raw", "gunzip", "zlib"]],
+    },
+
+    {
+        include: true,
+        arc: ["xz", ["raw", "xz", "liblzma"]],
+        ext: ["unxz", ["unraw", "unxz", "liblzma"]]
+    },
+
+    {
         arc: ["archive", ["arc-all", "comp-all"]],
         ext: ["extract", ["ext-all", "dec-all"]]
     }

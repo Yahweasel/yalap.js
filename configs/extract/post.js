@@ -85,5 +85,7 @@ Module.read_support_format_tar = Module.cwrap("archive_read_support_format_tar",
 Module.read_support_filter_gzip = Module.cwrap("archive_read_support_filter_gzip", "number", ["number"]);
 Module.read_support_filter_bzip2 = Module.cwrap("archive_read_support_filter_bzip2", "number", ["number"]);
 Module.read_support_filter_xz = Module.cwrap("archive_read_support_filter_xz", "number", ["number"]);
+Module.write_set_format_raw = Module.cwrap("archive_write_set_format_raw", "number", ["number"]);
+Module.read_support_format_raw = Module.cwrap("archive_read_support_format_raw", "number", ["number"]);
 Module.read_support_format_all = Module.cwrap("archive_read_support_format_all", "number", ["number"]);
 Module.read_support_filter_all = Module.cwrap("archive_read_support_filter_all", "number", ["number"]);

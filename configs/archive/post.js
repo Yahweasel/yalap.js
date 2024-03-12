@@ -85,5 +85,6 @@ Module.write_set_format_v7tar = Module.cwrap("archive_write_set_format_v7tar", "
 Module.write_add_filter_gzip = Module.cwrap("archive_write_add_filter_gzip", "number", ["number"]);
 Module.write_add_filter_bzip2 = Module.cwrap("archive_write_add_filter_bzip2", "number", ["number"]);
 Module.write_add_filter_xz = Module.cwrap("archive_write_add_filter_xz", "number", ["number"]);
+Module.write_set_format_raw = Module.cwrap("archive_write_set_format_raw", "number", ["number"]);
 Module.write_set_format_by_name = Module.cwrap("archive_write_set_format_by_name", "number", ["number", "string"]);
 Module.write_add_filter_by_name = Module.cwrap("archive_write_add_filter_by_name", "number", ["number", "string"]);
