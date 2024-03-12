@@ -29,27 +29,27 @@ build-%: dist/yalap-$(YALAP_VERSION)-%.js
 	true
 
 dist/yalap-$(YALAP_VERSION)-%.js: build/extern-post-%.js \
-	configs/%/exports.txt \
+	configs/configs/%/exports.txt \
 	node_modules/.bin/uglifyjs \
 	build/inst/lib/pkgconfig/libarchive.pc
 	mkdir -p dist
 	$(CC) $(CFLAGS) $(EFLAGS) \
 		-Ibuild/inst/include \
-		--extern-pre-js configs/$*/license.js \
-		--post-js configs/$*/post.js \
+		--extern-pre-js configs/configs/$*/license.js \
+		--post-js configs/configs/$*/post.js \
 		--extern-post-js build/extern-post-$*.js \
-		-s "EXPORTED_FUNCTIONS=@configs/$*/exports.txt" \
-		`cat configs/$*/eflags.txt` \
-		configs/$*/bindings.c \
+		-s "EXPORTED_FUNCTIONS=@configs/configs/$*/exports.txt" \
+		`cat configs/configs/$*/eflags.txt` \
+		configs/configs/$*/bindings.c \
 		build/inst/lib/libarchive.a \
-		`cat configs/$*/libs.txt` -o $@
+		`cat configs/configs/$*/libs.txt` -o $@
 	$(MINIFY) < $@ > $@.tmp
 	mv $@.tmp $@
 	chmod a-x dist/yalap-$(YALAP_VERSION)-$*.wasm
 
-build/extern-post-%.js: configs/%/extern-post.js $(YALAPO_SOURCES)
+build/extern-post-%.js: configs/configs/%/extern-post.js $(YALAPO_SOURCES)
 	mkdir -p build
-	cat $< `cat configs/$*/oo.txt` > $@
+	cat $< `cat configs/configs/$*/oo.txt` > $@
 
 oo/%.js: oo/%.ts node_modules/.bin/uglifyjs
 	./node_modules/.bin/tsc --target es5 --lib es2015,dom $<

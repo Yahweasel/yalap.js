@@ -36,13 +36,13 @@ yourself.
 
 ## Making a custom variant
 
-If all you want is to make a configuration that fits your needs, in the `config`
-directory, run a command like `./mkconfig.js plain-tar '["write", "read", "tar",
-"untar"]'`. The first argument is the name of the variant you're creating, and
-the second argument is a JSON array with the configuration fragments to include.
-The order of the fragments in the array is essentially irrelevant (it will
-affect the order that things are built in, and the order that some code appears
-in the generated JavaScript files, but nothing else).
+If all you want is to make a configuration that fits your needs, in the
+`configs` directory, run a command like `./mkconfig.js plain-tar '["write",
+"read", "tar", "untar"]'`. The first argument is the name of the variant you're
+creating, and the second argument is a JSON array with the configuration
+fragments to include. The order of the fragments in the array is essentially
+irrelevant (it will affect the order that things are built in, and the order
+that some code appears in the generated JavaScript files, but nothing else).
 
 Most configuration fragments have yalap.js-specific names. They're organized
 like so:
@@ -86,7 +86,7 @@ Each configuration has the following files:
 
 Configuration fragments contain the same files, and they are concatenated
 together to create the configurations. The build uses these files, and expects
-to find them in `config/<variant>` when you run `make build-<variant>`.
+to find them in `configs/configs/<variant>` when you run `make build-<variant>`.
 
 Configuration fragments are in `config/fragments`. Generally speaking, to create
 a new fragment, you will need `exports.txt` to list the functions needed,

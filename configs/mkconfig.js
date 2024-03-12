@@ -28,7 +28,11 @@ const special = [
 ];
 
 try {
-    fs.mkdirSync(name);
+    fs.mkdirSync("configs");
+} catch (ex) {}
+
+try {
+    fs.mkdirSync(`configs/${name}`);
 } catch (ex) {}
 
 function exists(f) {
@@ -56,7 +60,7 @@ function addFragment(out, part) {
     // Open the files
     const out = {};
     for (const file of files)
-        out[file] = fs.createWriteStream(`${name}/${file}`);
+        out[file] = fs.createWriteStream(`configs/${name}/${file}`);
 
     // Warning headers
     for (const file of files) {
