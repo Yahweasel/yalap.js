@@ -2,7 +2,6 @@ CC=emcc
 CFLAGS=-Oz
 MINIFY=./node_modules/.bin/uglifyjs -m --comments '/^!/'
 EFLAGS=\
-	--memory-init-file 0 \
 	-s WASM=2 \
 	-s "EXPORT_NAME='YALAP'" \
 	-s "EXPORTED_RUNTIME_METHODS=['cwrap']" \
